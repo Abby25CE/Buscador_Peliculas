@@ -1,18 +1,24 @@
-import "./App.css";
+import { Movies } from "./components/Movies";
+import { UseMovies } from "./Hooks/useMovies";
 
 function App() {
+  const { movies } = UseMovies();
+
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
-      <form className="rounded-lg w-96 h-96 border-2 border-purple-500 flex flex-col justify-center items-center gap-y-6">
+    <div className="flex items-center justify-center w-screen h-screen">
+      <form className="flex flex-col items-center justify-center border-2 border-purple-500 rounded-lg w-96 h-96 gap-y-6 bg-slate-700">
         <h1 className="text-lg font-bold">Buscador de Peliculas</h1>
         <input
-          className="w-2/3 rounded-lg border-2 py-2 px-1 border-purple-500"
+          className="w-2/3 px-1 py-2 border-2 border-purple-500 rounded-lg"
           placeholder="Harry Potter, Mad Madx, Hercules...."
         />
-        <button className="rounded-lg border border-transparent px-7 py-1 text-lg font-medium text-white bg-gray-800 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600">
+        <button className="py-1 text-lg font-medium text-white bg-gray-800 border border-transparent rounded-lg px-7 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600">
           Buscar
         </button>
       </form>
+      <main>
+        <Movies movies={movies} />
+      </main>
     </div>
   );
 }
