@@ -4,6 +4,7 @@ function App() {
   return (
     <div className="h-screen w-screen flex justify-center items-center">
       <form className="rounded-lg w-96 h-96 border-2 border-purple-500 flex flex-col justify-center items-center gap-y-6">
+        <h1 className="text-lg font-bold">Buscador de Peliculas</h1>
         <input
           className="w-2/3 rounded-lg border-2 py-2 px-1 border-purple-500"
           placeholder="Harry Potter, Mad Madx, Hercules...."
