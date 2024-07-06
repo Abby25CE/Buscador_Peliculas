@@ -1,22 +1,31 @@
 import { Movies } from "./components/Movies";
 import { UseMovies } from "./Hooks/useMovies";
+import { useState } from "react";
 
 function App() {
   const { movies } = UseMovies();
+  const [query, setQuery] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { query } = Object.fromEntries(new window.FormData(event.target));
+    //const { query } = Object.fromEntries(new window.FormData(event.target));
+    console.log({ query });
+  };
+
+  const handleChange = (event) => {
+    setQuery(event.target.value);
   };
 
   return (
     <div className="flex items-center justify-center w-screen h-screen">
       <form
-        onSubmit={handleSubmit()}
+        onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center border-2 border-purple-500 rounded-lg w-96 h-96 gap-y-6 bg-slate-700"
       >
         <h1 className="text-lg font-bold">Buscador de Peliculas</h1>
         <input
+          onChange={handleChange}
+          value={query}
           name="query"
           className="w-2/3 px-1 py-2 border-2 border-purple-500 rounded-lg"
           placeholder="Harry Potter, Mad Madx, Hercules...."
