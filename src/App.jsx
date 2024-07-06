@@ -49,32 +49,41 @@ function App() {
     updateSearch(event.target.value);
   };
 
+  const getErrorBorder = () => {
+    if (error) {
+      return " border-[#FF0000]";
+    } else {
+      return " border-purple-500";
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
+    <body className="flex flex-col items-start w-screen h-screen gap-y-5 ">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center border-2 border-purple-500 rounded-lg w-96 h-96 gap-y-6 bg-slate-700"
+        className="flex flex-row items-center justify-around w-full border-2 border-purple-500 rounded-lg h-28 bg-slate-700"
       >
         <h1 className="text-lg font-bold">Buscador de Peliculas</h1>
         <input
           onChange={handleChange}
           value={search}
           name="query"
-          className="w-2/3 px-1 py-2 border-2 border-purple-500 rounded-lg"
+          className={`border-2 w-2/3 px-1 py-2  rounded-lg ${getErrorBorder()} `}
           placeholder="Harry Potter, Mad Madx, Hercules...."
         />
         {error && <p className="font-bold text-red-950">{error}</p>}
         <button
           type="submit"
-          className="py-1 text-lg font-medium text-white bg-gray-800 border border-transparent rounded-lg px-7 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className={`py-1 text-lg font-medium text-white bg-gray-800 border border-transparent
+             rounded-lg px-7 hover:border-blue-600  focus:outline-none focus:ring-2 focus:ring-blue-600`}
         >
           Buscar
         </button>
       </form>
-      <main>
+      <div className="">
         <Movies movies={movies} />
-      </main>
-    </div>
+      </div>
+    </body>
   );
 }
 
