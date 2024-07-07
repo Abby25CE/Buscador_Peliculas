@@ -71,7 +71,7 @@ function App() {
           className={`border-2 w-2/3 px-1 py-2  rounded-lg ${getErrorBorder()} `}
           placeholder="Harry Potter, Mad Madx, Hercules...."
         />
-        {error && <p className="font-bold text-red-950">{error}</p>}
+        {error && <p className="flex font-bold text-red-950">{error}</p>}
         <button
           type="submit"
           className={`py-1 text-lg font-medium text-white bg-gray-800 border border-transparent
@@ -80,7 +80,7 @@ function App() {
           Buscar
         </button>
       </form>
-      <div className="">
+      <div className="flex flex-col mx-5">
         <Movies movies={movies} />
       </div>
     </body>

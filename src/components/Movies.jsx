@@ -1,11 +1,11 @@
 function ListOfMovies({ movies }) {
   return (
-    <ul className="h-screen">
+    <ul className="grid grid-cols-5 gap-5">
       {movies.map((movie) => (
-        <li key={movie.id}>
+        <li className="" key={movie.id}>
           <h3>{movie.title}</h3>
           <p>{movie.year}</p>
-          <img src={movie.poster} alt={movie.Title} />
+          <img src={movie.poster} alt={movie.Title} width={250} />
         </li>
       ))}
     </ul>
