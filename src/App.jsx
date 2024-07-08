@@ -36,7 +36,12 @@ function useSearch() {
 
 function App() {
   const { search, updateSearch, error } = useSearch();
-  const { movies, loading, getMovie } = UseMovies({ search });
+  const [sort, setSort] = useState(false);
+  const { movies, loading, getMovie } = UseMovies({ search, sort });
+
+  const handleSort = () => {
+    setSort(!sort);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,9 +65,15 @@ function App() {
     <div className="flex flex-col items-start w-screen h-screen gap-y-5 ">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-row items-center justify-around w-full border-2 border-purple-500 rounded-lg h-28 bg-slate-700"
+        className="flex items-center justify-around w-screen gap-3 border-2 border-purple-500 rounded-lg bg-slate-700"
       >
         <h1 className="text-lg font-bold">Buscador de Peliculas</h1>
+        <input
+          className="w-8 h-8 "
+          type="checkbox"
+          onChange={handleSort}
+          checked={sort}
+        ></input>
         <input
           onChange={handleChange}
           value={search}
@@ -70,6 +81,7 @@ function App() {
           className={`border-2 w-2/3 px-1 py-2  rounded-lg ${getErrorBorder()} `}
           placeholder="Harry Potter, Mad Madx, Hercules...."
         />
+
         {error && <p className="flex font-bold text-red-950">{error}</p>}
         <button
           type="submit"

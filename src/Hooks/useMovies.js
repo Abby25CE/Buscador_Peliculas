@@ -1,7 +1,7 @@
 import { searchMovies } from '../services/movies'
 import { useRef, useState } from "react";
 
-export function UseMovies({ search }) {
+export function UseMovies({ search, sort }) {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -23,5 +23,8 @@ export function UseMovies({ search }) {
         }
     }
 
-    return { movies, loading, getMovie };
+    const sortedMovies = sort
+        ? [...movies].sort((a, b) => a.year.localeCompare(b.year)) : movies
+
+    return { movies: sortedMovies, loading, getMovie };
 }
