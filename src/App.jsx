@@ -36,7 +36,7 @@ function useSearch() {
 
 function App() {
   const { search, updateSearch, error } = useSearch();
-  const { movies, getMovie } = UseMovies({ search });
+  const { movies, loading, getMovie } = UseMovies({ search });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -80,7 +80,17 @@ function App() {
         </button>
       </form>
       <div className="mx-5 ">
-        <Movies movies={movies} />
+        {loading ? (
+          <div
+            class=" animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500"
+            role="status"
+            aria-label="loading"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        ) : (
+          <Movies movies={movies} />
+        )}
       </div>
     </div>
   );
