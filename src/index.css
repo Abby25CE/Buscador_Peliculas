@@ -23,3 +23,29 @@ body {
   place-items: center;
   overflow-x: hidden;
 }
+.main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.movies {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minamax(200px, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.movie {
+  text-align: center;
+}
+
+.movie h3,
+.movie p {
+  margin: 0;
+}
+.movies img {
+  border-radius: 8px;
+  margin-top: 16px;
+}
