@@ -12,7 +12,7 @@ function ListOfMovies({ movies }) {
   );
 }
 function NoMoviesResult() {
-  return <p>No se encontraron peluculas</p>;
+  return <p>No se encontraron peliculas</p>;
 }
 
 export function Movies({ movies }) {

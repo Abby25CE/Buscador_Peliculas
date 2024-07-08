@@ -1,48 +1,47 @@
 import { Movies } from "./components/Movies";
 import { UseMovies } from "./Hooks/useMovies";
-import { useState } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+function useSearch() {
+  const [search, updateSearch] = useState("");
+  const [error, setError] = useState(null);
+  const isFirstInput = useRef(true);
+
+  useEffect(() => {
+    if (isFirstInput.current) {
+      isFirstInput.current = search === "";
+      return;
+    }
+
+    if (search === "") {
+      setError("No se puede buscar una pelicula vacia");
+      return;
+    }
+
+    if (search.match(/^\d+$/)) {
+      setError("No se puede iniciar una pelicula con un numero");
+      return;
+    }
+
+    if (search.length < 3) {
+      setError("La busqueda debe tener al menos 3 caracteres");
+      return;
+    }
+
+    setError(null);
+  }, [search]);
+
+  return { search, updateSearch, error };
+}
 
 function App() {
-  const { movies } = UseMovies();
-  const [search, updateSearch, error] = useSearch();
-
-  function useSearch() {
-    const [search, updateSearch] = useState("");
-    const [error, setError] = useState(null);
-    const isFirstInput = useRef(true);
-
-    useEffect(() => {
-      if (isFirstInput.current) {
-        isFirstInput.current = search === "";
-        return;
-      }
-
-      if (search === "") {
-        setError("No se puede buscar una pelicula vacia");
-        return;
-      }
-
-      if (search.match(/^\d+$/)) {
-        setError("No se puede iniciar una pelicula con un numero");
-        return;
-      }
-
-      if (search.length < 3) {
-        setError("La busqueda debe tener al menos 3 caracteres");
-        return;
-      }
-
-      setError(null);
-    }, [search]);
-
-    return [search, updateSearch, error];
-  }
+  const { search, updateSearch, error } = useSearch();
+  const { movies, getMovie } = UseMovies({ search });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     //const { query } = Object.fromEntries(new window.FormData(event.target));
-    console.log({ search });
+    getMovie();
   };
 
   const handleChange = (event) => {
@@ -58,7 +57,7 @@ function App() {
   };
 
   return (
-    <body className="flex flex-col items-start w-screen h-screen gap-y-5 ">
+    <div className="flex flex-col items-start w-screen h-screen gap-y-5 ">
       <form
         onSubmit={handleSubmit}
         className="flex flex-row items-center justify-around w-full border-2 border-purple-500 rounded-lg h-28 bg-slate-700"
@@ -83,7 +82,7 @@ function App() {
       <div className="mx-5 ">
         <Movies movies={movies} />
       </div>
-    </body>
+    </div>
   );
 }
 
