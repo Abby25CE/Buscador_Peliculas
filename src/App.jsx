@@ -80,7 +80,7 @@ function App() {
           Buscar
         </button>
       </form>
-      <div className="flex flex-col mx-5">
+      <div className="mx-5 ">
         <Movies movies={movies} />
       </div>
     </body>
